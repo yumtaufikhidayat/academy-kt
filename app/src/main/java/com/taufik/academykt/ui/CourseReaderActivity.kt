@@ -1,0 +1,58 @@
+package com.taufik.academykt.ui
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.taufik.academykt.R
+import com.taufik.academykt.ui.reader.content.ModuleContentFragment
+import com.taufik.academykt.ui.reader.interfaces.CourseReaderCallback
+import com.taufik.academykt.ui.reader.list.fragment.ModuleListFragment
+
+class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
+
+    companion object {
+        const val EXTRA_COURSE_ID = "com.taufik.academykt.ui.EXTRA_COURSE_ID"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_course_reader)
+
+        setParcelableData()
+    }
+
+    private fun setParcelableData() {
+        val bundle = intent.extras
+        if (bundle != null) {
+            val courseId = bundle.getString(EXTRA_COURSE_ID)
+            if (courseId != null) {
+                populateFragment()
+            }
+        }
+    }
+
+    override fun moveTo(position: Int, moduleId: String) {
+        val fragment = ModuleContentFragment.newInstance()
+        supportFragmentManager.beginTransaction().add(R.id.frame_container, fragment, ModuleContentFragment.TAG)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount <= 1) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun populateFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        var fragment = supportFragmentManager.findFragmentByTag(ModuleListFragment.TAG)
+        if (fragment == null) {
+            fragment = ModuleListFragment.newInstance()
+            fragmentTransaction.add(R.id.frame_container, fragment, ModuleListFragment.TAG)
+            fragmentTransaction.addToBackStack(null)
+        }
+        fragmentTransaction.commit()
+    }
+}

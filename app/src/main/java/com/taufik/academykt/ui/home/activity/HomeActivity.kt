@@ -1,4 +1,4 @@
-package com.taufik.academykt.ui.home
+package com.taufik.academykt.ui.home.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

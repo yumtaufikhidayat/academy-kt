@@ -17,14 +17,14 @@
         <activity
             android:name="com.taufik.academykt.ui.detail.activity.DetailCourseActivity"
             android:label="@string/title_activity_detail_course"
-            android:parentActivityName="com.taufik.academykt.ui.home.HomeActivity"
+            android:parentActivityName="com.taufik.academykt.ui.home.activity.HomeActivity"
             android:theme="@style/Theme.AcademyKt.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.taufik.academykt.ui.home.HomeActivity" />
+                android:value="com.taufik.academykt.ui.home.activity.HomeActivity" />
         </activity>
-        <activity android:name="com.taufik.academykt.ui.CourseReaderActivity" />
-        <activity android:name="com.taufik.academykt.ui.home.HomeActivity">
+        <activity android:name="com.taufik.academykt.ui.reader.activity.CourseReaderActivity" />
+        <activity android:name="com.taufik.academykt.ui.home.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

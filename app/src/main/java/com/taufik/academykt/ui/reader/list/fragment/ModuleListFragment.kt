@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.taufik.academykt.data.ModuleEntity
 import com.taufik.academykt.databinding.FragmentModuleListBinding
-import com.taufik.academykt.ui.CourseReaderActivity
+import com.taufik.academykt.ui.reader.activity.CourseReaderActivity
 import com.taufik.academykt.ui.reader.interfaces.CourseReaderCallback
 import com.taufik.academykt.ui.reader.list.adapter.ModuleListAdapter
-import com.taufik.academykt.utils.DataDummy
+import com.taufik.academykt.ui.reader.viewmodel.CourseReaderViewModel
 
 class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener {
 
@@ -25,6 +26,7 @@ class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener 
     private lateinit var fragmentModuleListBinding: FragmentModuleListBinding
     private lateinit var adapter: ModuleListAdapter
     private lateinit var courseReaderCallback: CourseReaderCallback
+    private lateinit var viewModel: CourseReaderViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +40,9 @@ class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
         adapter = ModuleListAdapter(this)
-        populateRecyclerView(DataDummy.generateDummyModules("a14"))
+        populateRecyclerView(viewModel.getModules())
     }
 
     override fun onAttach(context: Context) {
@@ -61,5 +64,6 @@ class ModuleListFragment : Fragment(), ModuleListAdapter.MyAdapterClickListener 
 
     override fun onItemClicked(position: Int, moduleId: String) {
         courseReaderCallback.moveTo(position, moduleId)
+        viewModel.setSelectedModule(moduleId)
     }
 }

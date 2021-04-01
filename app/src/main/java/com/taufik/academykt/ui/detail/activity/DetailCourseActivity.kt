@@ -3,6 +3,7 @@ package com.taufik.academykt.ui.detail.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -12,8 +13,9 @@ import com.taufik.academykt.R
 import com.taufik.academykt.data.CourseEntity
 import com.taufik.academykt.databinding.ActivityDetailCourseBinding
 import com.taufik.academykt.databinding.ContentDetailCourseBinding
-import com.taufik.academykt.ui.CourseReaderActivity
+import com.taufik.academykt.ui.reader.activity.CourseReaderActivity
 import com.taufik.academykt.ui.detail.adapter.DetailCourseAdapter
+import com.taufik.academykt.ui.detail.viewmodel.DetailCourseViewModel
 import com.taufik.academykt.utils.DataDummy
 
 class DetailCourseActivity : AppCompatActivity() {
@@ -49,11 +51,13 @@ class DetailCourseActivity : AppCompatActivity() {
         if (extras != null) {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
-                val modules = DataDummy.generateDummyModules(courseId)
+                val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
+                viewModel.setSelectedCourse(courseId)
+                val modules = viewModel.getModules()
                 adapter.setModules(modules)
                 for (course in DataDummy.generateDummyCourses()) {
                     if (course.courseId == courseId) {
-                        populateCourse(course)
+                        populateCourse(viewModel.getCourse())
                     }
                 }
             }

@@ -1,9 +1,9 @@
 package com.taufik.academykt.ui.bookmark.viewmodel
 
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Test
 
 class BookmarkViewModelTest {
 

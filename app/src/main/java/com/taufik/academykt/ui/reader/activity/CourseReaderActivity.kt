@@ -1,7 +1,7 @@
 package com.taufik.academykt.ui.reader.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.taufik.academykt.R
 import com.taufik.academykt.ui.reader.content.ModuleContentFragment

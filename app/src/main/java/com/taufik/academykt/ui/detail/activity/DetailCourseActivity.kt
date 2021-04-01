@@ -13,9 +13,9 @@ import com.taufik.academykt.R
 import com.taufik.academykt.data.CourseEntity
 import com.taufik.academykt.databinding.ActivityDetailCourseBinding
 import com.taufik.academykt.databinding.ContentDetailCourseBinding
-import com.taufik.academykt.ui.reader.activity.CourseReaderActivity
 import com.taufik.academykt.ui.detail.adapter.DetailCourseAdapter
 import com.taufik.academykt.ui.detail.viewmodel.DetailCourseViewModel
+import com.taufik.academykt.ui.reader.activity.CourseReaderActivity
 import com.taufik.academykt.utils.DataDummy
 
 class DetailCourseActivity : AppCompatActivity() {

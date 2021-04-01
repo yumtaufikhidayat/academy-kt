@@ -2,10 +2,10 @@ package com.taufik.academykt.ui.reader.viewmodel
 
 import com.taufik.academykt.data.ContentEntity
 import com.taufik.academykt.utils.DataDummy
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Test
 
 class CourseReaderViewModelTest {
 

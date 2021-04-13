@@ -11,12 +11,12 @@ import com.taufik.academykt.data.CourseEntity
 import com.taufik.academykt.databinding.ItemsAcademyBinding
 import com.taufik.academykt.ui.detail.activity.DetailCourseActivity
 
-class AcademyAdapter:RecyclerView.Adapter<AcademyAdapter.CourseViewHolder>() {
+class AcademyAdapter : RecyclerView.Adapter<AcademyAdapter.CourseViewHolder>() {
 
     private var listCourses = ArrayList<CourseEntity>()
 
     fun setCourses(courses: List<CourseEntity>?) {
-        if (courses==null) return
+        if (courses == null) return
         this.listCourses.clear()
         this.listCourses.addAll(courses)
     }
@@ -26,7 +26,7 @@ class AcademyAdapter:RecyclerView.Adapter<AcademyAdapter.CourseViewHolder>() {
             with(binding) {
                 tvItemTitle.text = course.title
                 tvItemDate.text = itemView.resources.getString(R.string.deadline_date, course.deadline)
-                itemView.setOnClickListener{
+                itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailCourseActivity::class.java)
                     intent.putExtra(DetailCourseActivity.EXTRA_COURSE, course.courseId)
                     itemView.context.startActivity(intent)

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.taufik.academykt.R
+import com.taufik.academykt.ui.academy.ViewModelFactory
 import com.taufik.academykt.ui.reader.content.ModuleContentFragment
 import com.taufik.academykt.ui.reader.interfaces.CourseReaderCallback
 import com.taufik.academykt.ui.reader.list.fragment.ModuleListFragment
@@ -25,7 +26,8 @@ class CourseReaderActivity : AppCompatActivity(), CourseReaderCallback {
     private fun setParcelableData() {
         val bundle = intent.extras
         if (bundle != null) {
-            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
+            val factory = ViewModelFactory.getInstance(this)
+            val viewModel = ViewModelProvider(this, factory)[CourseReaderViewModel::class.java]
             val courseId = bundle.getString(EXTRA_COURSE_ID)
             if (courseId != null) {
                 viewModel.setSelectedCourse(courseId)

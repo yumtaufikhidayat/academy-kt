@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.taufik.academykt.data.ModuleEntity
 import com.taufik.academykt.databinding.FragmentModuleContentBinding
+import com.taufik.academykt.ui.academy.ViewModelFactory
 import com.taufik.academykt.ui.reader.viewmodel.CourseReaderViewModel
 
 class ModuleContentFragment : Fragment() {
@@ -32,7 +33,8 @@ class ModuleContentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val viewModel = ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory())[CourseReaderViewModel::class.java]
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
             val module = viewModel.getSelectedModule()
             populateWebView(module)
         }

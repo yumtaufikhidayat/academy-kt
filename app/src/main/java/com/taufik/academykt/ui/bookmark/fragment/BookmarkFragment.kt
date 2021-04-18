@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.taufik.academykt.R
 import com.taufik.academykt.data.CourseEntity
 import com.taufik.academykt.databinding.FragmentBookmarkBinding
+import com.taufik.academykt.ui.academy.ViewModelFactory
 import com.taufik.academykt.ui.bookmark.adapter.BookmarkAdapter
 import com.taufik.academykt.ui.bookmark.interfaces.BookmarkFragmentCallback
 import com.taufik.academykt.ui.bookmark.viewmodel.BookmarkViewModel
@@ -37,7 +38,8 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
     private fun setData() {
         if (activity != null) {
 
-            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[BookmarkViewModel::class.java]
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
             val courses = viewModel.getBookmarks()
             val adapter = BookmarkAdapter(this)
             adapter.setCourses(courses)

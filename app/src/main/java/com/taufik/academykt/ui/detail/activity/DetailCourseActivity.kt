@@ -13,6 +13,7 @@ import com.taufik.academykt.R
 import com.taufik.academykt.data.CourseEntity
 import com.taufik.academykt.databinding.ActivityDetailCourseBinding
 import com.taufik.academykt.databinding.ContentDetailCourseBinding
+import com.taufik.academykt.ui.academy.ViewModelFactory
 import com.taufik.academykt.ui.detail.adapter.DetailCourseAdapter
 import com.taufik.academykt.ui.detail.viewmodel.DetailCourseViewModel
 import com.taufik.academykt.ui.reader.activity.CourseReaderActivity
@@ -51,7 +52,8 @@ class DetailCourseActivity : AppCompatActivity() {
         if (extras != null) {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
-                val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
+                val factory = ViewModelFactory.getInstance(this)
+                val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
                 viewModel.setSelectedCourse(courseId)
                 val modules = viewModel.getModules()
                 adapter.setModules(modules)

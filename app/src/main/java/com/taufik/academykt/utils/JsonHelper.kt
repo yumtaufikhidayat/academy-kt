@@ -1,6 +1,7 @@
 package com.taufik.academykt.utils
 
 import android.content.Context
+import com.taufik.academykt.data.source.remote.response.ContentResponse
 import com.taufik.academykt.data.source.remote.response.CourseResponse
 import com.taufik.academykt.data.source.remote.response.ModuleResponse
 import org.json.JSONException
@@ -25,7 +26,7 @@ class JsonHelper(private val context: Context) {
     fun loadCourses(): List<CourseResponse> {
         val list = ArrayList<CourseResponse>()
         try {
-            val responseObject = JSONObject(parsingFileToString("CourseResponse.json").toString())
+            val responseObject = JSONObject(parsingFileToString("CourseResponses.json").toString())
             val listArray = responseObject.getJSONArray("courses")
             for (i in 0 until listArray.length()) {
                 val course = listArray.getJSONObject(i)
@@ -73,5 +74,21 @@ class JsonHelper(private val context: Context) {
         }
 
         return list
+    }
+
+    fun loadContent(moduleId: String): ContentResponse {
+        val fileName = String.format("Content_%s.json", moduleId)
+        var contentResponse: ContentResponse? = null
+        try {
+            val result = parsingFileToString(fileName)
+            if (result != null) {
+                val responseObject = JSONObject(result)
+                val content = responseObject.getString("content")
+                contentResponse = ContentResponse(moduleId, content)
+            }
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return contentResponse as ContentResponse
     }
 }

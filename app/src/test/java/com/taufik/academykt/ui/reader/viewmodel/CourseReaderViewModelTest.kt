@@ -1,25 +1,35 @@
 package com.taufik.academykt.ui.reader.viewmodel
 
 import com.taufik.academykt.data.ContentEntity
+import com.taufik.academykt.data.ModuleEntity
+import com.taufik.academykt.data.source.AcademyRepository
 import com.taufik.academykt.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.verify
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class CourseReaderViewModelTest {
 
     private lateinit var viewModel: CourseReaderViewModel
-
     private val dummyCourse = DataDummy.generateDummyCourses()[0]
     private val courseId = dummyCourse.courseId
     private val dummyModules = DataDummy.generateDummyModules(courseId)
     private val moduleId = dummyModules[0].moduleId
 
+    @Mock
+    private lateinit var academyRepository: AcademyRepository
+
     @Before
     fun setUp() {
-        viewModel = CourseReaderViewModel()
-        viewModel.setSelectedModule(courseId)
+        viewModel = CourseReaderViewModel(academyRepository)
+        viewModel.setSelectedCourse(courseId)
         viewModel.setSelectedModule(moduleId)
 
         val dummyModule = dummyModules[0]
@@ -28,19 +38,21 @@ class CourseReaderViewModelTest {
 
     @Test
     fun getModules() {
+        `when`(academyRepository.getAllModulesByCourse(courseId)).thenReturn(dummyModules as ArrayList<ModuleEntity>?)
         val moduleEntities = viewModel.getModules()
+        verify(academyRepository).getAllModulesByCourse(courseId)
         assertNotNull(moduleEntities)
         assertEquals(7, moduleEntities.size.toLong())
     }
 
     @Test
     fun getSelectedModule() {
+        `when`(academyRepository.getContent(courseId, moduleId)).thenReturn(dummyModules[0])
         val moduleEntity = viewModel.getSelectedModule()
+        verify(academyRepository).getContent(courseId, moduleId)
         assertNotNull(moduleEntity)
-
         val contentEntity = moduleEntity.contentEntity
         assertNotNull(contentEntity)
-
         val content = contentEntity?.content
         assertNotNull(content)
         assertEquals(content, dummyModules[0].contentEntity?.content)

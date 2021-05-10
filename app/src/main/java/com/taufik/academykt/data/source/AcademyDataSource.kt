@@ -1,17 +1,18 @@
 package com.taufik.academykt.data.source
 
+import androidx.lifecycle.LiveData
 import com.taufik.academykt.data.CourseEntity
 import com.taufik.academykt.data.ModuleEntity
 
 interface AcademyDataSource {
 
-    fun getAllCourses(): ArrayList<CourseEntity>
+    fun getAllCourses(): LiveData<List<CourseEntity>>
 
-    fun getBookmarkedCourses(): ArrayList<CourseEntity>
+    fun getBookmarkedCourses(): LiveData<List<CourseEntity>>
 
-    fun getCourseWithModules(courseId: String): CourseEntity
+    fun getCourseWithModules(courseId: String): LiveData<CourseEntity>
 
-    fun getAllModulesByCourse(courseId: String): ArrayList<ModuleEntity>
+    fun getAllModulesByCourse(courseId: String): LiveData<List<ModuleEntity>>
 
-    fun getContent(courseId: String, moduleId: String): ModuleEntity
+    fun getContent(courseId: String, moduleId: String): LiveData<ModuleEntity>
 }

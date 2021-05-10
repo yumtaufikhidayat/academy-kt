@@ -2,6 +2,7 @@ package com.taufik.academykt.ui.detail.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,7 +18,6 @@ import com.taufik.academykt.ui.academy.ViewModelFactory
 import com.taufik.academykt.ui.detail.adapter.DetailCourseAdapter
 import com.taufik.academykt.ui.detail.viewmodel.DetailCourseViewModel
 import com.taufik.academykt.ui.reader.activity.CourseReaderActivity
-import com.taufik.academykt.utils.DataDummy
 
 class DetailCourseActivity : AppCompatActivity() {
 
@@ -25,12 +25,13 @@ class DetailCourseActivity : AppCompatActivity() {
         const val EXTRA_COURSE = "com.taufik.academykt.ui.detail.activity.EXTRA_COURSE"
     }
 
+    private lateinit var activityDetailCourseBinding: ActivityDetailCourseBinding
     private lateinit var detailContentBinding: ContentDetailCourseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val activityDetailCourseBinding = ActivityDetailCourseBinding.inflate(layoutInflater)
+        activityDetailCourseBinding = ActivityDetailCourseBinding.inflate(layoutInflater)
         detailContentBinding = activityDetailCourseBinding.detailContent
         setContentView(activityDetailCourseBinding.root)
 
@@ -48,20 +49,28 @@ class DetailCourseActivity : AppCompatActivity() {
     private fun setData() {
 
         val adapter = DetailCourseAdapter()
+
+        val factory = ViewModelFactory.getInstance(this)
+        val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
+
         val extras = intent.extras
         if (extras != null) {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
-                val factory = ViewModelFactory.getInstance(this)
-                val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
-                viewModel.setSelectedCourse(courseId)
-                val modules = viewModel.getModules()
-                adapter.setModules(modules)
-                for (course in DataDummy.generateDummyCourses()) {
-                    if (course.courseId == courseId) {
-                        populateCourse(viewModel.getCourse())
-                    }
+
+                activityDetailCourseBinding.apply {
+                    progressBar.visibility = View.VISIBLE
                 }
+
+                viewModel.setSelectedCourse(courseId)
+                viewModel.getModules().observe(this, { modules ->
+                    activityDetailCourseBinding.apply {
+                        progressBar.visibility = View.GONE
+                    }
+                    adapter.setModules(modules)
+                    adapter.notifyDataSetChanged()
+                })
+                viewModel.getCourse().observe(this, { course -> populateCourse(course) })
             }
         }
 

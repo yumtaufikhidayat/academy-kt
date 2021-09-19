@@ -12,10 +12,10 @@ import com.taufik.academykt.ui.bookmark.fragment.BookmarkFragment
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-        companion object {
-            @StringRes
-            private val TAB_TITLES = intArrayOf(R.string.home, R.string.bookmark)
-        }
+    companion object {
+        @StringRes
+        private val TAB_TITLES = intArrayOf(R.string.home, R.string.bookmark)
+    }
 
     override fun getCount(): Int = 2
 

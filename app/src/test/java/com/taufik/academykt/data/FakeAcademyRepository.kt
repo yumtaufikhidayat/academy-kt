@@ -54,7 +54,6 @@ class FakeAcademyRepository (private val remoteDataSource: RemoteDataSource) : A
 
     override fun getCourseWithModules(courseId: String): LiveData<CourseEntity> {
         val courseResult = MutableLiveData<CourseEntity>()
-
         remoteDataSource.getAllCourses(object : RemoteDataSource.LoadCoursesCallback {
             override fun onAllCoursesReceived(courseResponses: List<CourseResponse>) {
                 lateinit var course: CourseEntity

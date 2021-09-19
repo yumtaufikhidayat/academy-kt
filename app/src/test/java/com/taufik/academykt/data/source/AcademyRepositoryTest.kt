@@ -98,11 +98,8 @@ class AcademyRepositoryTest {
                 .onAllCoursesReceived(courseResponses)
             null
         }.`when`(remote).getAllCourses(any())
-
         val courseEntities = LiveDataTestUtil.getValue(academyRepository.getCourseWithModules(courseId))
-
         verify(remote).getAllCourses(any())
-
         assertNotNull(courseEntities)
         assertNotNull(courseEntities.title)
         assertEquals(courseResponses[0].title, courseEntities.title)

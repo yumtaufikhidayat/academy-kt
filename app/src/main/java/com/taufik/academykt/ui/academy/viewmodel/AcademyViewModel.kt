@@ -6,6 +6,5 @@ import com.taufik.academykt.data.CourseEntity
 import com.taufik.academykt.data.source.AcademyRepository
 
 class AcademyViewModel(private val academyRepository: AcademyRepository) : ViewModel() {
-
     fun getCourses(): LiveData<List<CourseEntity>> = academyRepository.getAllCourses()
 }

@@ -2,9 +2,9 @@ package com.taufik.academykt.ui.detail.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.taufik.academykt.data.AcademyRepository
 import com.taufik.academykt.data.source.local.entity.CourseEntity
 import com.taufik.academykt.data.source.local.entity.ModuleEntity
-import com.taufik.academykt.data.AcademyRepository
 
 class DetailCourseViewModel(private val academyRepository: AcademyRepository) : ViewModel() {
 

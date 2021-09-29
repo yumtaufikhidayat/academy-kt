@@ -2,8 +2,8 @@ package com.taufik.academykt.data.source.local
 
 import androidx.lifecycle.LiveData
 import com.taufik.academykt.data.source.local.entity.CourseEntity
-import com.taufik.academykt.data.source.local.entity.ModuleEntity
 import com.taufik.academykt.data.source.local.entity.CourseWithModule
+import com.taufik.academykt.data.source.local.entity.ModuleEntity
 import com.taufik.academykt.data.source.local.room.AcademyDao
 
 class LocalDataSource private constructor(private val mAcademyDao: AcademyDao){

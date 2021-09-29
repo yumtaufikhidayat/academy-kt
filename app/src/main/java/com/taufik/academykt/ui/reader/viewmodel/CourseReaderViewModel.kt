@@ -2,8 +2,8 @@ package com.taufik.academykt.ui.reader.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.taufik.academykt.data.source.local.entity.ModuleEntity
 import com.taufik.academykt.data.AcademyRepository
+import com.taufik.academykt.data.source.local.entity.ModuleEntity
 
 class CourseReaderViewModel(private val academyRepository: AcademyRepository) : ViewModel() {
 

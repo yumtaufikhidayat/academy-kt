@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.verify
-import com.taufik.academykt.data.CourseEntity
-import com.taufik.academykt.data.source.AcademyRepository
+import com.taufik.academykt.data.source.local.entity.CourseEntity
+import com.taufik.academykt.data.AcademyRepository
 import com.taufik.academykt.utils.DataDummy
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull

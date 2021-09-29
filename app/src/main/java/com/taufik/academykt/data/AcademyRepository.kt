@@ -1,10 +1,10 @@
-package com.taufik.academykt.data.source
+package com.taufik.academykt.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.taufik.academykt.data.ContentEntity
-import com.taufik.academykt.data.CourseEntity
-import com.taufik.academykt.data.ModuleEntity
+import com.taufik.academykt.data.source.local.entity.ContentEntity
+import com.taufik.academykt.data.source.local.entity.CourseEntity
+import com.taufik.academykt.data.source.local.entity.ModuleEntity
 import com.taufik.academykt.data.source.remote.RemoteDataSource
 import com.taufik.academykt.data.source.remote.response.ContentResponse
 import com.taufik.academykt.data.source.remote.response.CourseResponse

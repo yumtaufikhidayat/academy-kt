@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.taufik.academykt.data.ModuleEntity
+import com.taufik.academykt.data.source.local.entity.ModuleEntity
 import com.taufik.academykt.databinding.FragmentModuleListBinding
 import com.taufik.academykt.ui.academy.ViewModelFactory
 import com.taufik.academykt.ui.reader.activity.CourseReaderActivity

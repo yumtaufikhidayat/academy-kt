@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.taufik.academykt.data.ModuleEntity
+import com.taufik.academykt.data.source.local.entity.ModuleEntity
 import com.taufik.academykt.databinding.FragmentModuleContentBinding
 import com.taufik.academykt.ui.academy.ViewModelFactory
 import com.taufik.academykt.ui.reader.viewmodel.CourseReaderViewModel

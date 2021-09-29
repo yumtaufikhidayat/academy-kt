@@ -1,8 +1,8 @@
-package com.taufik.academykt.data.source
+package com.taufik.academykt.data
 
 import androidx.lifecycle.LiveData
-import com.taufik.academykt.data.CourseEntity
-import com.taufik.academykt.data.ModuleEntity
+import com.taufik.academykt.data.source.local.entity.CourseEntity
+import com.taufik.academykt.data.source.local.entity.ModuleEntity
 
 interface AcademyDataSource {
 

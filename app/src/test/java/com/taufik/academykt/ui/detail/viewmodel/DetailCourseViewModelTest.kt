@@ -3,9 +3,9 @@ package com.taufik.academykt.ui.detail.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.taufik.academykt.data.CourseEntity
-import com.taufik.academykt.data.ModuleEntity
-import com.taufik.academykt.data.source.AcademyRepository
+import com.taufik.academykt.data.source.local.entity.CourseEntity
+import com.taufik.academykt.data.source.local.entity.ModuleEntity
+import com.taufik.academykt.data.AcademyRepository
 import com.taufik.academykt.utils.DataDummy
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull

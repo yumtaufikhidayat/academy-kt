@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.taufik.academykt.R
-import com.taufik.academykt.data.CourseEntity
+import com.taufik.academykt.data.source.local.entity.CourseEntity
 import com.taufik.academykt.databinding.ItemsAcademyBinding
 import com.taufik.academykt.ui.detail.activity.DetailCourseActivity
 

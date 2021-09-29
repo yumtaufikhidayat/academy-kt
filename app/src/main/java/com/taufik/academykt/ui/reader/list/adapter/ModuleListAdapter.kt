@@ -3,7 +3,7 @@ package com.taufik.academykt.ui.reader.list.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.taufik.academykt.data.ModuleEntity
+import com.taufik.academykt.data.source.local.entity.ModuleEntity
 import com.taufik.academykt.databinding.ItemsModuleListCustomBinding
 
 class ModuleListAdapter internal constructor(private val listener: MyAdapterClickListener)

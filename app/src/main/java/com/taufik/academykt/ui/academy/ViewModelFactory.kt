@@ -3,7 +3,7 @@ package com.taufik.academykt.ui.academy
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.taufik.academykt.data.source.AcademyRepository
+import com.taufik.academykt.data.AcademyRepository
 import com.taufik.academykt.di.Injection
 import com.taufik.academykt.ui.academy.viewmodel.AcademyViewModel
 import com.taufik.academykt.ui.bookmark.viewmodel.BookmarkViewModel

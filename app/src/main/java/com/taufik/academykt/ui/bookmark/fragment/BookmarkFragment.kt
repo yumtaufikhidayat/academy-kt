@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.taufik.academykt.R
-import com.taufik.academykt.data.CourseEntity
+import com.taufik.academykt.data.source.local.entity.CourseEntity
 import com.taufik.academykt.databinding.FragmentBookmarkBinding
 import com.taufik.academykt.ui.academy.ViewModelFactory
 import com.taufik.academykt.ui.bookmark.adapter.BookmarkAdapter

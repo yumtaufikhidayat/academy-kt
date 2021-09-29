@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.taufik.academykt.databinding.FragmentAcademyBinding
 import com.taufik.academykt.ui.academy.ViewModelFactory
 import com.taufik.academykt.ui.academy.adapter.AcademyAdapter
 import com.taufik.academykt.ui.academy.viewmodel.AcademyViewModel
+import com.taufik.academykt.vo.Status
 
 class AcademyFragment : Fragment() {
 
@@ -40,17 +42,29 @@ class AcademyFragment : Fragment() {
 
             fragmentAcademyBinding.apply {
                 progressBar.visibility = View.VISIBLE
-                viewModel.getCourses().observe(viewLifecycleOwner, {
-                    progressBar.visibility = View.GONE
-                    academyAdapter.setCourses(it)
-                    academyAdapter.notifyDataSetChanged()
+                viewModel.getCourses().observe(viewLifecycleOwner, { courses ->
+                    if (courses != null) {
+                        when (courses.status) {
+                            Status.LOADING -> progressBar.visibility = View.VISIBLE
+                            Status.SUCCESS -> {
+                                progressBar.visibility = View.GONE
+                                academyAdapter.setCourses(courses.data)
+                                academyAdapter.notifyDataSetChanged()
+                            }
+                            Status.ERROR -> {
+                                progressBar.visibility = View.GONE
+                                Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                    }
                 })
-            }
 
-            with(fragmentAcademyBinding.rvAcademy) {
-                layoutManager = LinearLayoutManager(context)
-                setHasFixedSize(true)
-                adapter = academyAdapter
+                with(fragmentAcademyBinding.rvAcademy) {
+                    layoutManager = LinearLayoutManager(context)
+                    setHasFixedSize(true)
+                    adapter = academyAdapter
+                }
             }
         }
     }

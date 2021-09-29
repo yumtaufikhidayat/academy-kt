@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AcademyKt</string>
+    <string name="app_name">Dicoding Academy</string>
     <string name="title_activity_detail_course">Detail Course</string>
     <!-- Strings used for fragments for navigation -->
     <!-- TODO: Remove or change this placeholder text -->

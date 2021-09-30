@@ -1,6 +1,7 @@
 package com.taufik.academykt.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.taufik.academykt.data.source.local.entity.CourseEntity
 import com.taufik.academykt.data.source.local.entity.CourseWithModule
@@ -10,10 +11,10 @@ import com.taufik.academykt.data.source.local.entity.ModuleEntity
 interface AcademyDao {
 
     @Query("SELECT * FROM courseentities")
-    fun getCourses(): LiveData<List<CourseEntity>>
+    fun getCourses(): DataSource.Factory<Int, CourseEntity>
 
     @Query("SELECT * FROM courseentities WHERE bookmarked = 1")
-    fun getBookmarkedCourses(): LiveData<List<CourseEntity>>
+    fun getBookmarkedCourses(): DataSource.Factory<Int, CourseEntity>
 
     @Transaction
     @Query("SELECT * FROM courseentities WHERE courseId = :courseId")

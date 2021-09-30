@@ -24,12 +24,15 @@ class CourseReaderViewModel(private val academyRepository: AcademyRepository) : 
     var modules: LiveData<Resource<List<ModuleEntity>>> = Transformations.switchMap(courseId) { mCourseId ->
         academyRepository.getAllModulesByCourse(mCourseId)
     }
+
     var selectedModule: LiveData<Resource<ModuleEntity>> = Transformations.switchMap(moduleId) { selectedPosition ->
         academyRepository.getContent(selectedPosition)
     }
+
     fun readContent(module: ModuleEntity) {
         academyRepository.setReadModule(module)
     }
+
     fun getModuleSize(): Int {
         if (modules.value != null) {
             val moduleEntities = modules.value?.data
@@ -39,6 +42,7 @@ class CourseReaderViewModel(private val academyRepository: AcademyRepository) : 
         }
         return 0
     }
+
     fun setNextPage() {
         if (selectedModule.value != null && modules.value != null) {
             val moduleEntity = selectedModule.value?.data
@@ -51,6 +55,7 @@ class CourseReaderViewModel(private val academyRepository: AcademyRepository) : 
             }
         }
     }
+
     fun setPrevPage() {
         if (selectedModule.value != null && modules.value != null) {
             val moduleEntity = selectedModule.value?.data

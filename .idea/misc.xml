@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../../layout/custom_preview.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/activity_course_reader.xml" value="0.22" />
+        <entry key="app/src/main/res/layout-sw600dp/activity_course_reader.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_course_reader-sw600dp.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_course_reader.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_detail_course.xml" value="0.1828125" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_detail_course.xml" value="0.1828125" />

@@ -1,6 +1,7 @@
 package com.taufik.academykt.ui.academy.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,10 @@ import com.taufik.academykt.vo.Status
 class AcademyFragment : Fragment() {
 
     private lateinit var fragmentAcademyBinding: FragmentAcademyBinding
+
+    companion object {
+        const val TAG = "ACADEMY_FRAGMENT"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,19 +53,18 @@ class AcademyFragment : Fragment() {
                             Status.LOADING -> progressBar.visibility = View.VISIBLE
                             Status.SUCCESS -> {
                                 progressBar.visibility = View.GONE
-                                academyAdapter.setCourses(courses.data)
-                                academyAdapter.notifyDataSetChanged()
+                                Log.e(TAG, "setData: ${courses.data}")
+                                academyAdapter.submitList(courses.data)
                             }
                             Status.ERROR -> {
                                 progressBar.visibility = View.GONE
-                                Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT)
-                                    .show()
+                                Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
                 })
 
-                with(fragmentAcademyBinding.rvAcademy) {
+                with(rvAcademy) {
                     layoutManager = LinearLayoutManager(context)
                     setHasFixedSize(true)
                     adapter = academyAdapter

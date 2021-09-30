@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.IdlingRegistry
+import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -62,8 +63,15 @@ class HomeActivityTest {
 
     @Test
     fun loadBookmarks() {
+        onView(withId(R.id.rvAcademy)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.action_bookmark)).perform(click())
+        onView(isRoot()).perform(ViewActions.pressBack())
         onView(withText("Bookmark")).perform(click())
         onView(withId(R.id.rvBookmark)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvBookmark)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dummyCourse.size))
+        onView(withId(R.id.rvBookmark)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.tvTitle)).check(matches(isDisplayed()))
+        onView(withId(R.id.tvDate)).check(matches(isDisplayed()))
+        onView(withId(R.id.action_bookmark)).perform(click())
+        onView(isRoot()).perform(ViewActions.pressBack())
     }
 }

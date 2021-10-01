@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.taufik.academykt.data.AcademyRepository
-import com.taufik.academykt.data.source.local.entity.CourseEntity
 import com.taufik.academykt.data.source.local.entity.CourseWithModule
-import com.taufik.academykt.data.source.local.entity.ModuleEntity
 import com.taufik.academykt.vo.Resource
 
 class DetailCourseViewModel(private val academyRepository: AcademyRepository) : ViewModel() {

@@ -1,6 +1,8 @@
 package com.taufik.academykt.data
 
 import androidx.lifecycle.LiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.taufik.academykt.data.source.local.LocalDataSource
 import com.taufik.academykt.data.source.local.entity.CourseEntity
 import com.taufik.academykt.data.source.local.entity.CourseWithModule
@@ -19,21 +21,28 @@ class FakeAcademyRepository(
     private val appExecutors: AppExecutors
 ) : AcademyDataSource {
 
-    override fun getAllCourses(): LiveData<Resource<List<CourseEntity>>> {
-        return object : NetworkBoundResource<List<CourseEntity>, List<CourseResponse>>(appExecutors) {
-            public override fun loadFromDB(): LiveData<List<CourseEntity>> =
-                localDataSource.getAllCourses()
-
-            override fun shouldFetch(data: List<CourseEntity>?): Boolean =
-                data == null || data.isEmpty()
-
-            public override fun createCall(): LiveData<ApiResponse<List<CourseResponse>>> =
-                remoteDataSource.getAllCourses()
-
+    override fun getAllCourses(): LiveData<Resource<PagedList<CourseEntity>>> {
+        return object : NetworkBoundResource<PagedList<CourseEntity>, List<CourseResponse>>(appExecutors) {
+            public override fun loadFromDB(): LiveData<PagedList<CourseEntity>> {
+                val config = PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(4)
+                    .setPageSize(4)
+                    .build()
+                return LivePagedListBuilder(localDataSource.getAllCourses(), config).build()
+            }
+            override fun shouldFetch(data: PagedList<CourseEntity>?): Boolean {
+                return data == null || data.isEmpty()
+            }
+            public override fun createCall(): LiveData<ApiResponse<List<CourseResponse>>> {
+                return remoteDataSource.getAllCourses()
+            }
             public override fun saveCallResult(courseResponses: List<CourseResponse>) {
                 val courseList = ArrayList<CourseEntity>()
-                for (response in courseResponses) {
-                    val course = CourseEntity(response.id,
+                for (i in courseResponses.indices) {
+                    val response = courseResponses[i]
+                    val course = CourseEntity(
+                        response.id,
                         response.title,
                         response.description,
                         response.date,
@@ -41,14 +50,19 @@ class FakeAcademyRepository(
                         response.imagePath)
                     courseList.add(course)
                 }
-
                 localDataSource.insertCourses(courseList)
             }
         }.asLiveData()
     }
 
-    override fun getBookmarkedCourses(): LiveData<List<CourseEntity>> =
-        localDataSource.getBookmarkedCourses()
+    override fun getBookmarkedCourses(): LiveData<PagedList<CourseEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getBookmarkedCourses(), config).build()
+    }
 
     override fun getCourseWithModules(courseId: String): LiveData<Resource<CourseWithModule>> {
         return object : NetworkBoundResource<CourseWithModule, List<ModuleResponse>>(appExecutors) {

@@ -20,12 +20,6 @@ class BookmarkAdapter(
 
     private val listCourses = ArrayList<CourseEntity>()
 
-    fun setCourses(courses: List<CourseEntity>?) {
-        if (courses==null) return
-        this.listCourses.clear()
-        this.listCourses.addAll(courses)
-    }
-
     fun getSwipedData(swipedPosition: Int): CourseEntity? = getItem(swipedPosition)
 
     inner class CourseViewHolder(private val itemsBookmarkBinding: ItemsBookmarkBinding)
@@ -59,8 +53,12 @@ class BookmarkAdapter(
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-        val course = listCourses[position]
-        holder.bind(course)
+//        val course = listCourses[position]
+//        holder.bind(course)
+        val course = getItem(position)
+        if (course != null) {
+            holder.bind(course)
+        }
     }
 
     override fun getItemCount(): Int = listCourses.size

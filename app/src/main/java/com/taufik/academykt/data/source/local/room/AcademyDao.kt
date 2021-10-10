@@ -14,7 +14,7 @@ interface AcademyDao {
     fun getCourses(): DataSource.Factory<Int, CourseEntity>
 
     @Query("SELECT * FROM courseentities WHERE bookmarked = 1")
-    fun getBookmarkedCourses(): DataSource.Factory<Int, CourseEntity>
+    fun getBookmarkedCourse(): DataSource.Factory<Int, CourseEntity>
 
     @Transaction
     @Query("SELECT * FROM courseentities WHERE courseId = :courseId")

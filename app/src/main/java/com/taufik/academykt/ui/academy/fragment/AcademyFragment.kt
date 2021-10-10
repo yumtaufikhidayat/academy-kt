@@ -17,7 +17,8 @@ import com.taufik.academykt.vo.Status
 
 class AcademyFragment : Fragment() {
 
-    private lateinit var fragmentAcademyBinding: FragmentAcademyBinding
+    private var _fragmentAcademyBinding: FragmentAcademyBinding? = null
+    private val binding get() = _fragmentAcademyBinding
 
     companion object {
         const val TAG = "ACADEMY_FRAGMENT"
@@ -26,50 +27,48 @@ class AcademyFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
-        fragmentAcademyBinding = FragmentAcademyBinding.inflate(inflater, container, false)
-        return fragmentAcademyBinding.root
+        _fragmentAcademyBinding = FragmentAcademyBinding.inflate(layoutInflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setData()
-    }
-
-    private fun setData() {
         if (activity != null) {
 
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[AcademyViewModel::class.java]
             val academyAdapter = AcademyAdapter()
 
-            fragmentAcademyBinding.apply {
-                progressBar.visibility = View.VISIBLE
-                viewModel.getCourses().observe(viewLifecycleOwner, { courses ->
-                    if (courses != null) {
-                        when (courses.status) {
-                            Status.LOADING -> progressBar.visibility = View.VISIBLE
-                            Status.SUCCESS -> {
-                                progressBar.visibility = View.GONE
-                                Log.e(TAG, "setData: ${courses.data}")
-                                academyAdapter.submitList(courses.data)
-                            }
-                            Status.ERROR -> {
-                                progressBar.visibility = View.GONE
-                                Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
-                            }
+            viewModel.getCourses().observe(this, { courses ->
+                if (courses != null) {
+                    when (courses.status) {
+                        Status.LOADING -> binding?.progressBar?.visibility = View.VISIBLE
+                        Status.SUCCESS -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            Log.e(TAG, "setData: ${courses.data}")
+                            academyAdapter.submitList(courses.data)
+                        }
+                        Status.ERROR -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                         }
                     }
-                })
-
-                with(rvAcademy) {
-                    layoutManager = LinearLayoutManager(context)
-                    setHasFixedSize(true)
-                    adapter = academyAdapter
                 }
+            })
+
+            with(binding?.rvAcademy) {
+                this?.layoutManager = LinearLayoutManager(context)
+                this?.setHasFixedSize(true)
+                this?.adapter = academyAdapter
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _fragmentAcademyBinding = null
     }
 }

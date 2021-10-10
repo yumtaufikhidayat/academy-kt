@@ -1,6 +1,7 @@
 package com.taufik.academykt.ui.academy.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -17,13 +18,7 @@ class AcademyAdapter : PagedListAdapter<CourseEntity, AcademyAdapter.CourseViewH
 
     private var listCourses = ArrayList<CourseEntity>()
 
-    fun setCourses(courses: List<CourseEntity>?) {
-        if (courses == null) return
-        this.listCourses.clear()
-        this.listCourses.addAll(courses)
-    }
-
-    inner class CourseViewHolder(private val binding: ItemsAcademyBinding) : RecyclerView.ViewHolder(binding.root) {
+    class CourseViewHolder(private val binding: ItemsAcademyBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(course: CourseEntity) {
             with(binding) {
                 tvItemTitle.text = course.title
@@ -49,13 +44,19 @@ class AcademyAdapter : PagedListAdapter<CourseEntity, AcademyAdapter.CourseViewH
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-        val course = listCourses[position]
-        holder.bind(course)
+        val course = getItem(position)
+        if (course != null) {
+            Log.e(TAG, "onBindViewHolder: $course")
+            holder.bind(course)
+        }
+//        val course = listCourses[position]
+//        holder.bind(course)
     }
 
     override fun getItemCount(): Int = listCourses.size
 
     companion object {
+        private const val TAG = "ACADEMY_ADAPTER"
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CourseEntity>() {
             override fun areItemsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean {
                 return oldItem.courseId == newItem.courseId

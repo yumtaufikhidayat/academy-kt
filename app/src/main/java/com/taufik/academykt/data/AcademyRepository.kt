@@ -43,7 +43,7 @@ class AcademyRepository private constructor(
             public override fun loadFromDB(): LiveData<PagedList<CourseEntity>> {
                 val config = PagedList.Config.Builder()
                     .setEnablePlaceholders(false)
-                    .setInitialLoadSizeHint(5)
+                    .setInitialLoadSizeHint(4)
                     .setPageSize(4)
                     .build()
                 return LivePagedListBuilder(localDataSource.getAllCourses(), config).build()
@@ -70,7 +70,6 @@ class AcademyRepository private constructor(
                 localDataSource.insertCourses(courseList)
             }
         }.asLiveData()
-
     }
 
     override fun getBookmarkedCourses(): LiveData<PagedList<CourseEntity>> {

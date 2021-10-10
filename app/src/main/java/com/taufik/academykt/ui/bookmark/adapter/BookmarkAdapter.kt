@@ -18,8 +18,6 @@ class BookmarkAdapter(
     private val callback: BookmarkFragmentCallback
 ) : PagedListAdapter<CourseEntity, BookmarkAdapter.CourseViewHolder>(DIFF_CALLBACK) {
 
-    private val listCourses = ArrayList<CourseEntity>()
-
     fun getSwipedData(swipedPosition: Int): CourseEntity? = getItem(swipedPosition)
 
     inner class CourseViewHolder(private val itemsBookmarkBinding: ItemsBookmarkBinding)
@@ -60,8 +58,6 @@ class BookmarkAdapter(
             holder.bind(course)
         }
     }
-
-    override fun getItemCount(): Int = listCourses.size
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CourseEntity>() {

@@ -16,8 +16,6 @@ import com.taufik.academykt.ui.detail.activity.DetailCourseActivity
 
 class AcademyAdapter : PagedListAdapter<CourseEntity, AcademyAdapter.CourseViewHolder>(DIFF_CALLBACK) {
 
-    private var listCourses = ArrayList<CourseEntity>()
-
     class CourseViewHolder(private val binding: ItemsAcademyBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(course: CourseEntity) {
             with(binding) {
@@ -52,8 +50,6 @@ class AcademyAdapter : PagedListAdapter<CourseEntity, AcademyAdapter.CourseViewH
 //        val course = listCourses[position]
 //        holder.bind(course)
     }
-
-    override fun getItemCount(): Int = listCourses.size
 
     companion object {
         private const val TAG = "ACADEMY_ADAPTER"

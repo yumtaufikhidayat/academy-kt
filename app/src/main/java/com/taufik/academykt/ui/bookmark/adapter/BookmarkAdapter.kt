@@ -51,8 +51,6 @@ class BookmarkAdapter(
     }
 
     override fun onBindViewHolder(holder: CourseViewHolder, position: Int) {
-//        val course = listCourses[position]
-//        holder.bind(course)
         val course = getItem(position)
         if (course != null) {
             holder.bind(course)
@@ -61,13 +59,11 @@ class BookmarkAdapter(
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<CourseEntity>() {
-            override fun areItemsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean {
-                return oldItem.courseId == newItem.courseId
-            }
+            override fun areItemsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean =
+                oldItem.courseId == newItem.courseId
 
-            override fun areContentsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean {
-                return oldItem == newItem
-            }
+            override fun areContentsTheSame(oldItem: CourseEntity, newItem: CourseEntity): Boolean =
+                oldItem == newItem
         }
     }
 }

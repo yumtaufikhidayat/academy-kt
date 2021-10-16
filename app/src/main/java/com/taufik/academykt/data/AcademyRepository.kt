@@ -19,8 +19,7 @@ class AcademyRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
-) :
-    AcademyDataSource {
+) : AcademyDataSource {
 
     companion object {
         @Volatile
@@ -95,7 +94,8 @@ class AcademyRepository private constructor(
             override fun saveCallResult(data: List<ModuleResponse>) {
                 val moduleList = ArrayList<ModuleEntity>()
                 for (response in data) {
-                    val course = ModuleEntity(response.moduleId,
+                    val course = ModuleEntity(
+                        response.moduleId,
                         response.courseId,
                         response.title,
                         response.position,

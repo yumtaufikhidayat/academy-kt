@@ -58,14 +58,4 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper){
         }, SERVICE_LATENCY_IN_MILLIS)
         return resultContent
     }
-
-    interface LoadCoursesCallback {
-        fun onAllCoursesReceived(courseResponses: List<CourseResponse>)
-    }
-    interface LoadModulesCallback {
-        fun onAllModulesReceived(moduleResponses: List<ModuleResponse>)
-    }
-    interface LoadContentCallback {
-        fun onContentReceived(contentResponse: ContentResponse)
-    }
 }

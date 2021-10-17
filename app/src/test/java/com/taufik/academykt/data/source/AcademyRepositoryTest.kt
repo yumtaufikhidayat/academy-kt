@@ -67,6 +67,7 @@ class AcademyRepositoryTest {
         val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, CourseEntity>
         `when`(local.getBookmarkedCourses()).thenReturn(dataSourceFactory)
         academyRepository.getBookmarkedCourses()
+
         val courseEntities = Resource.success(PagedListUtil.mockPagedList(DataDummy.generateDummyCourses()))
         verify(local).getBookmarkedCourses()
         assertNotNull(courseEntities)

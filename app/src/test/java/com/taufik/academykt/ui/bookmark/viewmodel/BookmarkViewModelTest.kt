@@ -43,10 +43,11 @@ class BookmarkViewModelTest {
     fun getBookmarks() {
         val dummyCourses = pagedList
         `when`(dummyCourses.size).thenReturn(5)
+
         val courses = MutableLiveData<PagedList<CourseEntity>>()
         courses.value = dummyCourses
-
         `when`(academyRepository.getBookmarkedCourses()).thenReturn(courses)
+
         val courseEntities = viewModel.getBookmarks().value
         verify(academyRepository).getBookmarkedCourses()
         assertNotNull(courseEntities)
